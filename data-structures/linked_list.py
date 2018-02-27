@@ -3,8 +3,9 @@ class LinkedList:
     head = None
     first = None
     last = None
+    length = 0
 
-    def add(self, value):
+    def add(self, value, position):
         _node = Node(value)
 
         if not self.first:
@@ -14,9 +15,15 @@ class LinkedList:
             self.first = _node
             return
 
-        self.last.next = _node
+        _prev = self.find(position - 1)
+        _current = _prev.next
 
-    def find(self):
+        _node.next = _current
+        _prev.next = _node
+
+        self.length += 1
+
+    def find(self, position):
         return None
 
     def remove(self):

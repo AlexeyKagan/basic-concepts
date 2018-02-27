@@ -16,6 +16,11 @@ class LinkedList:
 
         self.last.next = _node
 
+    def find(self):
+        return None
+
+    def remove(self):
+        return None
 
 class Node:
     value = None

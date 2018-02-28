@@ -5,17 +5,19 @@ class LinkedList:
     last = None
     length = 0
 
+    def __repr__(self):
+        return "head: %s" % self.head
+
     def add(self, value, position):
         _node = Node(value)
 
-        if not self.first:
-            _node.next = None
+        if position == 0:
+            _node.next = self.head
             self.head = _node
-            self.last = _node
-            self.first = _node
             return
 
         _prev = self.find(position - 1)
+
         _current = _prev.next
 
         _node.next = _current
@@ -24,10 +26,25 @@ class LinkedList:
         self.length += 1
 
     def find(self, position):
-        return None
+        found = False
+        index = 0
+        _node = self.head
 
-    def remove(self):
-        return None
+        while not found:
+            if index == position:
+                found = True
+            else:
+                _node = _node.next
+                index += 1
+
+        return _node
+
+    def remove(self, position):
+        _prev_node = self.find(position - 1)
+        _prev_node.next = _prev_node.next.next
+
+        self.length -= 1
+
 
 class Node:
     value = None
@@ -36,3 +53,14 @@ class Node:
     def __init__(self, value):
         self.value = value
 
+    def __repr__(self):
+        return "| value: %s, next: %s" % (self.value, self.next)
+
+
+linked_list = LinkedList()
+linked_list.add(3, 0)
+linked_list.add(4, 1)
+linked_list.add(5, 2)
+linked_list.add(6, 3)
+linked_list.remove(2)
+print linked_list
